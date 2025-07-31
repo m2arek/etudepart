@@ -30,8 +30,10 @@ document.getElementById("calculateIrrButton").addEventListener("click", async ()
   const fr = n => n.toLocaleString('fr-FR', { maximumFractionDigits: 2 });
   const facturean = facture * 12;
   const facturean10 = facturean * Math.pow(1 + haussekwh, 10);
+  const facturean20 = facturean * Math.pow(1 + haussekwh, 20);
   document.getElementById("facturean").textContent = fr(facturean);
   document.getElementById("facturean10").textContent = fr(facturean10);
+  document.getElementById("facturean20").textContent = fr(facturean20);
 
   const angle = 35;
   const url = `https://re.jrc.ec.europa.eu/api/v5_2/PVcalc?outputformat=basic&lat=${gps[0]}&lon=${gps[1]}&raddatabase=PVGIS-SARAH2&peakpower=1&loss=14&pvtechchoice=crystSi&angle=${angle}&aspect=${orientation}&usehorizon=1`;
@@ -110,6 +112,7 @@ document.getElementById("calculateIrrButton").addEventListener("click", async ()
     document.getElementById("reventemensuelle").textContent = fr(reventemensuelle);
     document.getElementById("facturean").textContent = fr(facturean);
     document.getElementById("facturean10").textContent = fr(facturean10);
+    document.getElementById("facturean20").textContent = fr(facturean20);
 
   } catch (e) {
     alert("Erreur lors du calcul. Vérifiez les données ou la connexion.");
