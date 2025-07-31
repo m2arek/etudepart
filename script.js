@@ -19,13 +19,19 @@ document.getElementById("calculateIrrButton").addEventListener("click", async ()
   }
 
   const orientation = parseFloat(document.getElementById("orientationIrr").value);
-  const facture = parseFloat(document.getElementById("facture").value);
+  const facture = parseFloat(document.getElementById("facture").value) || 0;
   const tarif = parseFloat(document.getElementById("tarif").value) || 0.206;
   const puissance = parseFloat(document.getElementById("puissance").value);
   const haussekwh = (parseFloat(document.getElementById("haussekwh").value) || 5) / 100;
   const ratioautoconso = (parseFloat(document.getElementById("ratioautoconso").value) || 80) / 100;
   const ratiorevente = 1 - ratioautoconso;
   document.getElementById("ratiorevente").value = (ratiorevente * 100).toFixed(1);
+
+  const fr = n => n.toLocaleString('fr-FR', { maximumFractionDigits: 2 });
+  const facturean = facture * 12;
+  const facturean10 = facturean * Math.pow(1 + haussekwh, 10);
+  document.getElementById("facturean").textContent = fr(facturean);
+  document.getElementById("facturean10").textContent = fr(facturean10);
 
   const angle = 35;
   const url = `https://re.jrc.ec.europa.eu/api/v5_2/PVcalc?outputformat=basic&lat=${gps[0]}&lon=${gps[1]}&raddatabase=PVGIS-SARAH2&peakpower=1&loss=14&pvtechchoice=crystSi&angle=${angle}&aspect=${orientation}&usehorizon=1`;
@@ -59,13 +65,10 @@ document.getElementById("calculateIrrButton").addEventListener("click", async ()
     const totalprime = prime * puissance;
 
     const consokwh = (facture * 12) / tarif;
-    const facturean = facture * 12;
     const autoconsokwh = prod * ratioautoconso;
     const reventekwh = prod * ratiorevente;
     const kwh10ans = tarif * Math.pow(1 + haussekwh, 10);
     const facture10ans = facture * Math.pow(1 + haussekwh, 10);
-    const facturean10 = facturean * Math.pow(1 + haussekwh, 10);
-    const fr = n => n.toLocaleString('fr-FR', { maximumFractionDigits: 2 });
 
     // 🔢 Production mensuelle (extraite du texte PVGIS)
     const moisNoms = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"];
