@@ -59,10 +59,12 @@ document.getElementById("calculateIrrButton").addEventListener("click", async ()
     const totalprime = prime * puissance;
 
     const consokwh = (facture * 12) / tarif;
+    const facturean = facture * 12;
     const autoconsokwh = prod * ratioautoconso;
     const reventekwh = prod * ratiorevente;
     const kwh10ans = tarif * Math.pow(1 + haussekwh, 10);
     const facture10ans = facture * Math.pow(1 + haussekwh, 10);
+    const facturean10 = facturean * Math.pow(1 + haussekwh, 10);
     const fr = n => n.toLocaleString('fr-FR', { maximumFractionDigits: 2 });
 
     // 🔢 Production mensuelle (extraite du texte PVGIS)
@@ -103,6 +105,8 @@ document.getElementById("calculateIrrButton").addEventListener("click", async ()
     document.getElementById("rachatDisplay").value = rachat.toFixed(4);
     document.getElementById("economiemensuelle").textContent = fr(economiemensuelle);
     document.getElementById("reventemensuelle").textContent = fr(reventemensuelle);
+    document.getElementById("facturean").textContent = fr(facturean);
+    document.getElementById("facturean10").textContent = fr(facturean10);
 
   } catch (e) {
     alert("Erreur lors du calcul. Vérifiez les données ou la connexion.");
