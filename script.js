@@ -47,12 +47,12 @@ document.getElementById("calculateIrrButton").addEventListener("click", async ()
     let productible = null;
     for (let line of lines) {
       if (line.includes("Year")) {
-        const parts = line.split("\t");
+        const parts = line.trim().split(/\s+/);
         productible = parseFloat(parts[1]);
         break;
       }
     }
-    if (productible == null) throw new Error("Productible non trouvé");
+      if (!isFinite(productible)) throw new Error("Productible non trouvé");
 
     const prod = productible * puissance;
     let rachat = 0;
@@ -77,7 +77,7 @@ document.getElementById("calculateIrrButton").addEventListener("click", async ()
     const prodMensuelle = [];
 
     for (let line of lines) {
-      const parts = line.trim().split("\t");
+      const parts = line.trim().split(/\s+/);
       if (/^\d+\s/.test(line) && parts.length >= 3) {
         const mois = parseInt(parts[0]);
         const e_m = parseFloat(parts[2]);
