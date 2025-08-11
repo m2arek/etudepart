@@ -35,7 +35,7 @@ document.getElementById("calculateIrrButton").addEventListener("click", async ()
   document.getElementById("facturean10").textContent = fr(facturean10);
   document.getElementById("facturean20").textContent = fr(facturean20);
 
-  const angle = 30;
+  const angle = 28;
   const url = `https://re.jrc.ec.europa.eu/api/v5_2/PVcalc?outputformat=basic&lat=${gps[0]}&lon=${gps[1]}&raddatabase=PVGIS-SARAH2&peakpower=1&loss=10&pvtechchoice=crystSi&angle=${angle}&aspect=${orientation}&usehorizon=1`;
   const proxyUrl = `https://corsproxy.io/?url=${encodeURIComponent(url)}`;
 
