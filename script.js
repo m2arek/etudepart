@@ -74,8 +74,9 @@ document.getElementById("calculateIrrButton").addEventListener("click", async ()
 
     const factotal20anssanspv = facturean * (Math.pow(1 + haussekwh, 20) - 1) / haussekwh;
     const economies20ans = autoconsokwh * tarif * (Math.pow(1 + haussekwh, 20) - 1) / haussekwh;
-    const revente20ans = reventekwh * rachat * 20;
-    const factotal20ansavecpv = factotal20anssanspv - economies20ans - revente20ans;
+    const reventetotal20ans = reventekwh * rachat * 20;
+    const ecototal20ans = economies20ans + reventetotal20ans;
+    const factotal20ansavecpv = factotal20anssanspv - ecototal20ans;
 
     // 🔢 Production mensuelle (extraite du texte PVGIS)
     const moisNoms = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"];
@@ -119,6 +120,8 @@ document.getElementById("calculateIrrButton").addEventListener("click", async ()
     document.getElementById("facturean10").textContent = fr(facturean10);
     document.getElementById("facturean20").textContent = fr(facturean20);
     document.getElementById("factotal20anssanspv").textContent = fr(factotal20anssanspv);
+    document.getElementById("reventetotal20ans").textContent = fr(reventetotal20ans);
+    document.getElementById("ecototal20ans").textContent = fr(ecototal20ans);
     document.getElementById("factotal20ansavecpv").textContent = fr(factotal20ansavecpv);
 
   } catch (e) {
