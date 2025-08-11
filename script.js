@@ -72,6 +72,11 @@ document.getElementById("calculateIrrButton").addEventListener("click", async ()
     const kwh10ans = tarif * Math.pow(1 + haussekwh, 10);
     const facture10ans = facture * Math.pow(1 + haussekwh, 10);
 
+    const factotal20anssanspv = facturean * (Math.pow(1 + haussekwh, 20) - 1) / haussekwh;
+    const economies20ans = autoconsokwh * tarif * (Math.pow(1 + haussekwh, 20) - 1) / haussekwh;
+    const revente20ans = reventekwh * rachat * 20;
+    const factotal20ansavecpv = factotal20anssanspv - economies20ans - revente20ans;
+
     // 🔢 Production mensuelle (extraite du texte PVGIS)
     const moisNoms = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"];
     const prodMensuelle = [];
@@ -113,6 +118,8 @@ document.getElementById("calculateIrrButton").addEventListener("click", async ()
     document.getElementById("facturean").textContent = fr(facturean);
     document.getElementById("facturean10").textContent = fr(facturean10);
     document.getElementById("facturean20").textContent = fr(facturean20);
+    document.getElementById("factotal20anssanspv").textContent = fr(factotal20anssanspv);
+    document.getElementById("factotal20ansavecpv").textContent = fr(factotal20ansavecpv);
 
   } catch (e) {
     alert("Erreur lors du calcul. Vérifiez les données ou la connexion.");
