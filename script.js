@@ -11,10 +11,10 @@ document.getElementById("puissance").addEventListener("input", () => {
 });
 
 document.getElementById("calculateIrrButton").addEventListener("click", async () => {
-  const gpsRaw = document.getElementById("gpsCoord").value.trim();
-  const gps = gpsRaw.split(",").map(s => parseFloat(s.trim()));
-  if (gps.length !== 2 || gps.some(isNaN)) {
-    alert("Veuillez entrer des coordonnées valides au format : latitude, longitude");
+  const lat = parseFloat(document.getElementById("latitude").value);
+  const lon = parseFloat(document.getElementById("longitude").value);
+  if (isNaN(lat) || isNaN(lon)) {
+    alert("Veuillez entrer des coordonnées valides");
     return;
   }
 
@@ -36,7 +36,7 @@ document.getElementById("calculateIrrButton").addEventListener("click", async ()
   document.getElementById("facturean20").textContent = fr(facturean20);
 
   const angle = 28;
-  const url = `https://re.jrc.ec.europa.eu/api/v5_2/PVcalc?outputformat=basic&lat=${gps[0]}&lon=${gps[1]}&raddatabase=PVGIS-SARAH2&peakpower=1&loss=10&pvtechchoice=crystSi&angle=${angle}&aspect=${orientation}&usehorizon=1`;
+  const url = `https://re.jrc.ec.europa.eu/api/v5_2/PVcalc?outputformat=basic&lat=${lat}&lon=${lon}&raddatabase=PVGIS-SARAH2&peakpower=1&loss=10&pvtechchoice=crystSi&angle=${angle}&aspect=${orientation}&usehorizon=1`;
   const proxyUrl = `https://corsproxy.io/?url=${encodeURIComponent(url)}`;
 
   try {
